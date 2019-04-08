@@ -516,7 +516,12 @@ body{ font-family:Alegreya;font-size:1.1rem;
     margin-left:auto;margin-right:auto;
     width:60%; 
 }
-pre{ font-family:Microsoft Yahei;font-size:1.1rem;
+
+pre{ font-size:1.1rem;
+    margin-left:auto;margin-right:auto;
+}
+#code{
+    font-family:Tahoma,Microsoft Yahei;font-size:1.1rem;
     margin-left:auto;margin-right:auto;
 }
 @media  screen and (max-width:540px){ body { width:94%; } }

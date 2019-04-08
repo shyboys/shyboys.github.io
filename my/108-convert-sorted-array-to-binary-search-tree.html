@@ -1,0 +1,55 @@
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../css/my.css"/>
+</head>
+
+<h3 text-align="center">108. Convert Sorted Array to Binary Search Tree</h3>
+Given an array where elements are sorted in ascending order,convert it to a height balanced BST.</br>
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node nerver differ by more than 1.
+</br></br>
+ Example:
+ </br></br>
+ Given the sorted array: [-10, -3, 0, 5, 9],
+ </br></br>
+ One possible answer is: [0, -3, 9, -10, null, 5], which reprensents the following
+ height balanced BST:
+ <pre>
+      0
+     / \
+   -3   9
+   /   /
+ -10  5
+ </pre>
+ 
+ <hr>
+ approach 1:
+ <pre id="code">
+ /**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* br(vector&ltint>& nums, int l, int r){
+        if(l > r) return NULL;
+        int mid = (l + r) / 2; 
+        TreeNode* root = new TreeNode(nums[mid]);
+        root -> left = br(nums, l, mid - 1);
+        root -> right = br(nums, mid + 1, r);
+        return root;
+    }
+    TreeNode* sortedArrayToBST(vector&ltint>& nums) {
+        return br(nums, 0, nums.size()-1);
+    }
+};
+ </pre>
+ 
+
+
+
