@@ -1,0 +1,19 @@
+
+class Solution {
+public:
+    vector&ltvector&ltint>> res;
+    vector&ltvector&ltint>> zigzagLevelOrder(TreeNode* root) {
+        zigzagLevelOrder(root, 0);
+        return res;
+    }
+    void zigzagLevelOrder(TreeNode* root, int height){
+        if(root == NULL) return;
+        if(res.size() <= height) res.resize(height+1);
+        
+        if(height%2 == 0) res[height].push_back(root->val);
+        else res[height].insert(res[height].begin(), root->val);
+        
+        zigzagLevelOrder(root->left, height+1);
+        zigzagLevelOrder(root->right, height+1);
+    }
+};
