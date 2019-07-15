@@ -512,12 +512,12 @@ html{
 @media  screen and (max-width:360px){ html { font-size:14.25px; } }	/*Android常用宽度*/
 @media  screen and (max-width:320px){ html { font-size:14px; } }	
 
-body{ font-family:Alegreya;font-size:1.1rem;
+body{ font-family:Tahoma;font-size:1.1rem;
     margin-left:auto;margin-right:auto;
     width:60%; 
 }
 
-pre{ font-size:1.1rem;font-family:Alegreya;
+pre{ font-size:1.1rem;font-family:Tahoma;
     margin-left:auto;margin-right:auto;
 }
 #code{
