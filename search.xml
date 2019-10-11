@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[linux中的SUID，SGID,SBIT]]></title>
+      <url>/2017/10/09/SUID/</url>
+      <content type="html"><![CDATA[<p>首先linux中文件的权限，r=4,w=2,x=1<br>-rwxrwx— 770权限表示此文件(文件夹)的拥有着和同组用户有读写及执行权限，其他用户组没任何权限<br>linux下文件的类型<br>-表示普通文件<br>d表示文件夹<br>l表示链接文件<br>b表示块设备<br>c表示字符设备<br>然后了解一下SUID吧，SUID就是set用户的id简称。<br>比如:</p>
+<blockquote>
+<p>ls -l /usr/bin/passwd</p>
+</blockquote>
+<p>结果输出</p>
+<blockquote>
+<p>-rwsr-xr-x. 1 root root 27832 Jun 10  2014 /usr/bin/passwd<br>执行位x为s说明这个程序具有suid权限，就像我们普通用户要修改密码，<br>但是对于/etc/shadow文件的权限是没有的，而通过passwd命令具有root权限就能修改密码了。</p>
+</blockquote>
+<p>一点注意</p>
+<blockquote>
+<p>1.SUID只对二进制文件有效<br>2.调用者对该文件有执行权<br>3.在执行过程中，调用者会暂时获得该文件的所有者权限<br>4.该权限只在程序执行的过程中有效  </p>
+</blockquote>
+<p>SGID就是Set GID了，就是获得该文件所属组的权限了。SGID用于普通二进制文件和目录<br>当作用于文件时就是获得文件组的权限，而作用于目录时，其他用户在目录下创建的文件就属于该目录所属的组了。<br>SBIT即sticky bit(黏着位)，作用在其他用户的权限的执行位上，只能作用于目录，用户在该目录下创建的文件只能被<br>该用户和root用户删除。</p>
+<blockquote>
+<p>ls -ld /tmp<br>drwxrwxrwt. 9 root root 200 Oct  9 02:23 /tmp</p>
+</blockquote>
+<p>好了，如何设置上述三种权限呢？？<br>SUID=4，SGID=2，SBIT=1；</p>
+<blockquote>
+<p>chmod 6666 test #设置SUID和SGID给test文件</p>
+</blockquote>
+<p>查找具有SUID权限的文件。</p>
+<blockquote>
+<p>find / -user root -perm -4000 -print 2&gt;/dev/null</p>
+</blockquote>
+<p>利用其提权，如果find命令具有具有SUID的话，一般不可能哈。</p>
+<blockquote>
+<p>touch test<br>find test -exec whoami \;</p>
+</blockquote>
+<p>参考文章：<br><a href="http://blog.csdn.net/xiaocainiaoshangxiao/article/details/17378611" target="_blank" rel="external">http://blog.csdn.net/xiaocainiaoshangxiao/article/details/17378611</a><br><a href="http://www.freebuf.com/articles/system/149118.html" target="_blank" rel="external">http://www.freebuf.com/articles/system/149118.html</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[ssh免密码登录]]></title>
+      <url>/2017/09/29/sshNoPasswordLogin/</url>
+      <content type="html"><![CDATA[<p>1, 配置/etc/ssh/sshd.conf为下列</p>
+<blockquote>
+<p>RSAAuthentication yes<br>PubkeyAuthentication yes<br>ServerKeyBits 1024<br>PasswordAuthentication yes<br>PermitRootLogin yes<br>然后重启service sshd restart</p>
+</blockquote>
+<p>2，生成公私匙</p>
+<blockquote>
+<p>ssh-keygen生成公私匙，然后将在/root/.ssh/下将id_rsa.pub复制为authorized_keys<br>chmod 600 /root/.ssh/authorized_keys<br>chmod 700 /root/.ssh/<br>然后重启ssd :service sshd restart<br>然后将id_rsa.pub和id_rsa复制到本地windows的文件夹中。</p>
+</blockquote>
+<p>3，使用secureCRT连接。<br> 配置会话publickey的属性为下图所示：<br><a href="http://osa5nia8m.bkt.clouddn.com/20170929/1.png" target="_blank" rel="external"><img src="http://osa5nia8m.bkt.clouddn.com/20170929/1.png" alt="1"></a><br>4,然后无密码连接成功<br><a href="http://osa5nia8m.bkt.clouddn.com/20170929/2.png" target="_blank" rel="external"><img src="http://osa5nia8m.bkt.clouddn.com/20170929/2.png" alt="2"></a></p>
+<p>参考链接：<a href="http://blog.csdn.net/qq_27446553/article/details/46409493" target="_blank" rel="external">http://blog.csdn.net/qq_27446553/article/details/46409493</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[建立自己的博客]]></title>
+      <url>/2017/09/17/buildYourBlog/</url>
+      <content type="html"><![CDATA[<h5 id="注册一个github的账号"><a href="#注册一个github的账号" class="headerlink" title="注册一个github的账号"></a>注册一个github的账号</h5><p>当你注册好一个github账号后，建立一个你的注册名.github.io(比如我建了一个shyboys.github.io);<br>然后下载这个项目到本地就行了,例如放在github目录下</p>
+<h5 id="安装git和hexo和node-js"><a href="#安装git和hexo和node-js" class="headerlink" title="安装git和hexo和node.js"></a>安装git和hexo和node.js</h5><p><a href="https://git-scm.com/downloads" target="_blank" rel="external">下载git</a><br><a href="https://nodejs.org/en/" target="_blank" rel="external">下载node.js</a><br>然后安装hexo</p>
+<blockquote>
+<p>npm install -g hexo-cli</p>
+</blockquote>
+<p>安装好后在终端输入hexo看是否安装成功<br>然后在github目录输入如下命令</p>
+<blockquote>
+<p>hexo init myblog<br>cd myblog<br>npm install<br>npm install hexo-generator-search –save</p>
+</blockquote>
+<p>然后修改config.yml中的url属性为<a href="https://你的项目名，比如我的https://shyboys.github.io" target="_blank" rel="external">https://你的项目名，比如我的https://shyboys.github.io</a><br>然后在myblog文件夹下建立文件run.bat(如果是windows系统)<br>在run.bat文件中写下 hexo clean &amp;&amp; hexo g &amp;&amp; xcopy .\public ..\shyboys.github.io /s/e/y &amp;&amp; cd ..\shyboys.github.io &amp;&amp; git add –all &amp;&amp; git commit -m ‘aaa’ &amp;&amp; git push<br>然后双击运行即可</p>
+<h5 id="下载使用某猫的主题"><a href="#下载使用某猫的主题" class="headerlink" title="下载使用某猫的主题"></a>下载使用某猫的主题</h5><p>下载某猫主题点<a href="https://github.com/moumao/hexo-theme-Vateral" target="_blank" rel="external">这里</a><br>然后解压放在theme文件夹下重命名为Vateral<br>修改config.yml中的theme属性为Vateral即可<br>写得不是很详细,下面有详细地址。</p>
+<p>详细文章<a href="http://www.jianshu.com/p/e99ed60390a8" title="Title" target="_blank" rel="external">简书</a><br><a href="http://wowubuntu.com/markdown/#link" title="Title" target="_blank" rel="external">Markdown语法说明</a></p>
+<h5 id="markdown语法"><a href="#markdown语法" class="headerlink" title="markdown语法"></a>markdown语法</h5><blockquote>
+<p>[![1]][1]<br>[1]: 图片的url</p>
+</blockquote>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> other </tag>
+            
+        </tags>
+        
+    </entry>
+    
+  
+  
+</search>
