@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   
   <meta name="keywords" content="不会画画的程序员">
@@ -30,10 +30,10 @@
           url(/fonts/MaterialIcons-Regular.woff) format('woff'),
           url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
       }
-  </style>
+  </style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body>
-<div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
 <div id="menu-outer">
   <div id="menu-inner">
       <ul id="slide-out" class="side-nav" >
@@ -134,23 +134,42 @@
     
   </div>
   <div class="post-page-content">
-  <p>首先linux中文件的权限，r=4,w=2,x=1<br>-rwxrwx— 770权限表示此文件(文件夹)的拥有着和同组用户有读写及执行权限，其他用户组没任何权限<br>linux下文件的类型<br>-表示普通文件<br>d表示文件夹<br>l表示链接文件<br>b表示块设备<br>c表示字符设备<br>然后了解一下SUID吧，SUID就是set用户的id简称。<br>比如:</p>
+  <p>首先linux中文件的权限，r=4,w=2,x=1<br>
+-rwxrwx— 770权限表示此文件(文件夹)的拥有着和同组用户有读写及执行权限，其他用户组没任何权限<br>
+linux下文件的类型<br>
+-表示普通文件<br>
+d表示文件夹<br>
+l表示链接文件<br>
+b表示块设备<br>
+c表示字符设备<br>
+然后了解一下SUID吧，SUID就是set用户的id简称。<br>
+比如:</p>
 <blockquote>
 <p>ls -l /usr/bin/passwd</p>
 </blockquote>
 <p>结果输出</p>
 <blockquote>
-<p>-rwsr-xr-x. 1 root root 27832 Jun 10  2014 /usr/bin/passwd<br>执行位x为s说明这个程序具有suid权限，就像我们普通用户要修改密码，<br>但是对于/etc/shadow文件的权限是没有的，而通过passwd命令具有root权限就能修改密码了。</p>
+<p>-rwsr-xr-x. 1 root root 27832 Jun 10  2014 /usr/bin/passwd<br>
+执行位x为s说明这个程序具有suid权限，就像我们普通用户要修改密码，<br>
+但是对于/etc/shadow文件的权限是没有的，而通过passwd命令具有root权限就能修改密码了。</p>
 </blockquote>
 <p>一点注意</p>
 <blockquote>
-<p>1.SUID只对二进制文件有效<br>2.调用者对该文件有执行权<br>3.在执行过程中，调用者会暂时获得该文件的所有者权限<br>4.该权限只在程序执行的过程中有效  </p>
+<p>1.SUID只对二进制文件有效<br>
+2.调用者对该文件有执行权<br>
+3.在执行过程中，调用者会暂时获得该文件的所有者权限<br>
+4.该权限只在程序执行的过程中有效</p>
 </blockquote>
-<p>SGID就是Set GID了，就是获得该文件所属组的权限了。SGID用于普通二进制文件和目录<br>当作用于文件时就是获得文件组的权限，而作用于目录时，其他用户在目录下创建的文件就属于该目录所属的组了。<br>SBIT即sticky bit(黏着位)，作用在其他用户的权限的执行位上，只能作用于目录，用户在该目录下创建的文件只能被<br>该用户和root用户删除。</p>
+<p>SGID就是Set GID了，就是获得该文件所属组的权限了。SGID用于普通二进制文件和目录<br>
+当作用于文件时就是获得文件组的权限，而作用于目录时，其他用户在目录下创建的文件就属于该目录所属的组了。<br>
+SBIT即sticky bit(黏着位)，作用在其他用户的权限的执行位上，只能作用于目录，用户在该目录下创建的文件只能被<br>
+该用户和root用户删除。</p>
 <blockquote>
-<p>ls -ld /tmp<br>drwxrwxrwt. 9 root root 200 Oct  9 02:23 /tmp</p>
+<p>ls -ld /tmp<br>
+drwxrwxrwt. 9 root root 200 Oct  9 02:23 /tmp</p>
 </blockquote>
-<p>好了，如何设置上述三种权限呢？？<br>SUID=4，SGID=2，SBIT=1；</p>
+<p>好了，如何设置上述三种权限呢？？<br>
+SUID=4，SGID=2，SBIT=1；</p>
 <blockquote>
 <p>chmod 6666 test #设置SUID和SGID给test文件</p>
 </blockquote>
@@ -160,9 +179,12 @@
 </blockquote>
 <p>利用其提权，如果find命令具有具有SUID的话，一般不可能哈。</p>
 <blockquote>
-<p>touch test<br>find test -exec whoami \;</p>
+<p>touch test<br>
+find test -exec whoami ;</p>
 </blockquote>
-<p>参考文章：<br><a href="http://blog.csdn.net/xiaocainiaoshangxiao/article/details/17378611" target="_blank" rel="external">http://blog.csdn.net/xiaocainiaoshangxiao/article/details/17378611</a><br><a href="http://www.freebuf.com/articles/system/149118.html" target="_blank" rel="external">http://www.freebuf.com/articles/system/149118.html</a></p>
+<p>参考文章：<br>
+<a href="http://blog.csdn.net/xiaocainiaoshangxiao/article/details/17378611" target="_blank" rel="external">http://blog.csdn.net/xiaocainiaoshangxiao/article/details/17378611</a><br>
+<a href="http://www.freebuf.com/articles/system/149118.html" target="_blank" rel="external">http://www.freebuf.com/articles/system/149118.html</a></p>
 
   </div>
   <!--评论块-->
@@ -280,7 +302,7 @@
             links();
             menu();
         });
-</script>
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>

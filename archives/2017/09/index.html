@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="">
 <head>
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   
   <meta name="keywords" content="不会画画的程序员">
@@ -30,10 +30,10 @@
           url(/fonts/MaterialIcons-Regular.woff) format('woff'),
           url(/fonts/MaterialIcons-Regular.ttf) format('truetype')
       }
-  </style>
+  </style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 <body>
-<div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><div id="menu-box"><a href="javascript:void(0)" id="menu" data-activates="slide-out" class="button-collapse menu" ><span class="nav-btn"></span></a></div>
 <div id="menu-outer">
   <div id="menu-inner">
       <ul id="slide-out" class="side-nav" >
@@ -165,7 +165,11 @@
               
                 1, 配置/etc/ssh/sshd.conf为下列
 
-RSAAuthentication yesPubkeyAuthentication yesServerKeyBits 1024PasswordAuthentication yesPermitRootLogin yes
+RSAAuthentication yes
+PubkeyAuthentication yes
+ServerKeyBits 1024
+PasswordAuthentication yes
+PermitRootLogin ye...
               
             </p>
           </div>
@@ -206,7 +210,8 @@ RSAAuthentication yesPubkeyAuthentication yesServerKeyBits 1024PasswordAuthentic
             <p>
               摘要：
               
-                注册一个github的账号当你注册好一个github账号后，建立一个你的注册名.github.io(比如我建了一个shyboys.github.io);...
+                 注册一个github的账号
+当你注册好一个github账号后，
               
             </p>
           </div>
@@ -289,7 +294,7 @@ RSAAuthentication yesPubkeyAuthentication yesServerKeyBits 1024PasswordAuthentic
             links();
             menu();
         });
-</script>
+</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </body>
 </html>
